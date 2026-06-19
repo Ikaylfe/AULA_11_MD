@@ -15,6 +15,13 @@ try:
     # iso-8859-1  | utf-8  | latin1 | cp1252
     df_ocorrencias = pd.read_csv(ENDERECO_DADOS, sep=';', encoding='iso-8859-1')
 
+    # df_ocorrencias = df_ocorrencias[
+    #     (df_ocorrencias['ano'] == 2022) |
+    #     (df_ocorrencias['ano'] == 2023)
+    # ]
+
+    df_ocorrencias = df_ocorrencias[df_ocorrencias['ano'].isin([2020,2021,2022])]
+
     # delimitando as variáveis
     df_roubo_veiculo = df_ocorrencias[['munic', 'roubo_veiculo']]
 
@@ -220,25 +227,41 @@ try:
     
         plt.bar(df_roubo_veiculo_menores['munic'], df_roubo_veiculo_menores['roubo_veiculo'])
         plt.title('Cidades com menores casos de roubos')
+        plt.xticks(rotation=45, ha='right')
 
+    #box exemplo aula -Boxplot com outliers (diagrama de caixa e bigodes)
+    # plt.subplot(2, 2, 3) 
+    # plt.boxplot(array_roubo_veiculo, showmeans=True)
+    # plt.title('Boxplot dos Roubos por Municípios')
+
+    #Sugestão boxplot copilot - visualização da aula e uma de escala.
+    # plt.figure(figsize=(10,4))
+    # plt.subplot(1,2,1)
+    # plt.boxplot(array_roubo_veiculo, vert=False, showmeans=True)
+    # plt.title('Original')
 
     plt.subplot(2, 2, 3) 
-    plt.boxplot(array_roubo_veiculo, showmeans=True)
+    plt.boxplot(np.log1p(array_roubo_veiculo), vert=False, showmeans=True)
+    plt.title('Escala Log')
+    plt.tight_layout()
+    plt.show()
+    
 
 
 
 
     plt.subplot(2, 2, 4) 
-    plt.text(0.1,0.9, f'Média: {media_roubo_veiculo :.2f}', fontsize=6)
-    plt.text(0.1,0.8, f'Mediana: {mediana_roubo_veiculo:.2f}', fontsize=6)
-    plt.text(0.1,0.7, f'Distância: {distancia :.2f}', fontsize=6)
-    plt.text(0.1,0.6, f'Menor valor: {minimo :.2f}', fontsize=6)
-    plt.text(0.1,0.5, f'Limite Inferior: {limite_inferior :.2f}', fontsize=6)
-    plt.text(0.1,0.4, f'Q1: {q1 :.2f}', fontsize=6)
-    plt.text(0.1,0.3, f'Q3: {q3 :.2f}', fontsize=6)
-    plt.text(0.1,0.2, f'Limite superior: {limite_superior :.2f}', fontsize=6)
-    plt.text(0.1,0.1, f'Maior Valor: {maximo :.2f}', fontsize=6)
-    plt.text(0.1,0, f'Amplitude total: {amplitude :.2f}', fontsize=6)
+    plt.text(0.5,0.9, f'Média: {media_roubo_veiculo :.2f}', fontsize=10)
+    plt.text(0.5,0.8, f'Mediana: {mediana_roubo_veiculo:.2f}', fontsize=10)
+    plt.text(0.5,0.7, f'Distância: {distancia :.2f}', fontsize=10)
+    plt.text(0.5,0.6, f'Menor valor: {minimo :.2f}', fontsize=10)
+    plt.text(0.5,0.5, f'Limite Inferior: {limite_inferior :.2f}', fontsize=10)
+
+    plt.text(0.1,0.9, f'Q1: {q1 :.2f}', fontsize=10)
+    plt.text(0.1,0.8, f'Q3: {q3 :.2f}', fontsize=10)
+    plt.text(0.1,0.7, f'Limite superior: {limite_superior :.2f}', fontsize=10)
+    plt.text(0.1,0.6, f'Maior Valor: {maximo :.2f}', fontsize=10)
+    plt.text(0.1,0.5, f'Amplitude total: {amplitude :.2f}', fontsize=10)
 
     plt.title('RESUMO ESTATÍSTICO')
 
