@@ -1,0 +1,6 @@
+	Medida			|	Interpretação
+Amplitude alta		|Dados muito espalhados
+Variância alta		|Alta variabilidade
+Desvio padrão alto	|Pouca homogeneidade
+IQR alto			|Grande dispersão no centro
+CV alto (>30%)		|Dados muito variáveis
